@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.mediam.MainNavigationActivity
 import com.example.mediam.post.view.Home
 import com.example.mediam.R
 import com.example.mediam.databinding.ActivityMainBinding
@@ -61,12 +62,12 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
 
         goToHome()
-        Toast.makeText(this, "Inciando Sesión...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Iniciando Sesión...", Toast.LENGTH_SHORT).show()
     }
 
     private fun goToHome() {
         //val preferences: SharedPreferences = getSharedPreferences("shad.pref", MODE_PRIVATE)
-        val intentLogin = Intent(applicationContext, Home::class.java)
+        val intentLogin = Intent(applicationContext, MainNavigationActivity::class.java)
         /*intentLogin.apply {
             putExtra("message", "Hola")
             putExtra("data", preferences.getString("email", ""))

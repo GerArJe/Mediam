@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mediam">
         <activity
+            android:name=".MainNavigationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main_navigation" />
+        <activity
             android:name=".post.view.Home"
             android:exported="false" />
         <activity
