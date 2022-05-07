@@ -14,4 +14,10 @@
     <string name="atr_s">Atrás</string>
     <string name="ingresar">Ingresar</string>
     <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="title_activity_main_navigation">MainNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Publicar</string>
+    <string name="title_notifications">Perfil</string>
+    <string name="publicar">Publicar</string>
+    <string name="perfil">Perfil</string>
 </resources>

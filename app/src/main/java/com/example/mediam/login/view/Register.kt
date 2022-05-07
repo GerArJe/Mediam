@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.mediam.MainNavigationActivity
 import com.example.mediam.post.view.Home
 import com.example.mediam.R
 import com.example.mediam.login.viewModel.RegisterViewModel
@@ -51,7 +52,7 @@ class Register : AppCompatActivity() {
         editor.putBoolean("login", true)
         editor.apply()
 
-        val intentLogin = Intent(applicationContext, Home::class.java)
+        val intentLogin = Intent(applicationContext, MainNavigationActivity::class.java)
         intentLogin.apply {
             //putExtra("message", "Hola")
             putExtra("data", user.email)

@@ -3,11 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.122" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.122" />
         <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/drawable/ic_camera.xml" value="0.1" />
         <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_main_navigation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_navigation.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_post.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/layout/fragment_posts.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/deime/OneDrive/Documents/Mediam/Mediam/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
