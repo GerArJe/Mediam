@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.mediam.ui.dashboard.PostsFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_posts"
+        android:name="com.example.mediam.ui.posts.PostsFragment"
+        android:label="@string/title_posts"
         tools:layout="@layout/fragment_posts" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.mediam.ui.notifications.PerfilFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_search_users"
+        android:name="com.example.mediam.ui.buscar.BuscarFragment"
+        android:label="@string/title_buscar"
+        tools:layout="@layout/buscar_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.example.mediam.ui.perfil.PerfilFragment"
+        android:label="@string/title_perfil"
         tools:layout="@layout/fragment_perfil" />
 </navigation>

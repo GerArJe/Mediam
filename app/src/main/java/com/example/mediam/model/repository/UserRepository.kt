@@ -1,10 +1,12 @@
 package com.example.mediam.model.repository
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.example.mediam.model.entity.User
+import android.content.SharedPreferences
 
 class UserRepository {
 
@@ -50,6 +52,7 @@ class UserRepository {
                     user?.let {
                         it.id = id
                         userObserver.value = user
+                        //saveInSharedInfoUser(user)
                     }
                 }.addOnFailureListener {
                     userObserver.value = null
@@ -58,4 +61,8 @@ class UserRepository {
             userObserver.value = null
         }
     }
+
+    /*private fun saveInSharedInfoUser(info:Any){
+
+    }*/
 }

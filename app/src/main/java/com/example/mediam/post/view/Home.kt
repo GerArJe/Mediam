@@ -19,26 +19,9 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-
-
-
-        binding.logoutxt.setOnClickListener {
-            logout()
-        }
-
-
     }
 
-    private fun logout() {
-        val preferences: SharedPreferences = getSharedPreferences("shad.pref", MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.clear()
-        editor.apply()
 
-        val intent = Intent(applicationContext, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-    }
 
 
 }

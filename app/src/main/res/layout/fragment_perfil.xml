@@ -1,22 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.PerfilFragment">
+    tools:context=".ui.perfil.PerfilFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="20dp"
+        android:background="#049E8F">
+
+        <ImageView
+            android:id="@+id/img_user_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_user"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/logo_usuario" />
+
+        <TextView
+            android:id="@+id/full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/img_user_profile"
+            android:fontFamily="@font/bungee"
+            android:includeFontPadding="false"
+            android:text="Deimer Ramos"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/email_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dramos.cuello@gmail.com"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/secular"
+            android:includeFontPadding="false"
+            android:layout_toEndOf="@id/img_user_profile"
+            android:layout_below="@id/full_name"
+            android:layout_marginStart="10dp"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="20dp"
+        android:layout_marginTop="-100dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#049E8F"
+            app:cardElevation="10dp"
+            android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/followers"
+                    android:layout_centerHorizontal="true">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/followers_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    android:textSize="15sp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/bungee"
+                    android:layout_centerInParent="true">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/followers_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seguidores"
+                    android:includeFontPadding="false"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/secular"
+                    android:layout_below="@id/followers_count"
+                    android:layout_centerHorizontal="true">
+                </TextView>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#049E8F"
+            app:cardElevation="10dp"
+            android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/add_friend"
+                    android:layout_centerHorizontal="true">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/following_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13"
+                    android:textSize="15sp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/bungee"
+                    android:layout_centerInParent="true">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/following_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiendo"
+                    android:includeFontPadding="false"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/secular"
+                    android:layout_below="@id/following_count"
+                    android:layout_centerHorizontal="true">
+                </TextView>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aqui van los post de este usuario"
+            android:fontFamily="@font/secular"
+            android:textSize="20sp">
+
+
+        </TextView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

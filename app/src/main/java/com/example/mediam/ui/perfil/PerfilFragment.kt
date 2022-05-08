@@ -1,4 +1,4 @@
-package com.example.mediam.ui.notifications
+package com.example.mediam.ui.perfil
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,30 +13,25 @@ class PerfilFragment : Fragment() {
 
     private var _binding: FragmentPerfilBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(PerfilViewModel::class.java)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val notificationsViewModel =  ViewModelProvider(this).get(PerfilViewModel::class.java)
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
+        /*val textView: TextView = binding.textPerfil
         notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
+        }*/
+
+        println("Hola")
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        println("Adios")
         _binding = null
     }
 }
