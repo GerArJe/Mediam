@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Mediam</string>
+    <string name="txt_post_title">Titulo</string>
+    <string name="txt_post_description">Descripción</string>
+    <string name="hint_topic">Topic</string>
+    <string name="txt_btn_create_post">Crear</string>
+    <string name="txt_btn_edit_post">Editar</string>
+    <string name="txt_error_create_post">Error> al crear el post</string>
+    <string name="txt_error_update_post">Error> al actualizar el post</string>
+    <string name="txt_fields_required">Todos los campos son obligatorios</string>
 </resources>
