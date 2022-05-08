@@ -1,6 +1,8 @@
 package com.example.mediam.post.viewModel
 
+import android.app.Application
 import android.net.Uri
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.mediam.model.entity.Post
@@ -8,9 +10,9 @@ import com.example.mediam.model.entity.Topic
 import com.example.mediam.model.repository.PostRepository
 import com.example.mediam.model.repository.TopicRepository
 
-class PostActivityViewModel : ViewModel() {
+class PostActivityViewModel (application: Application): AndroidViewModel(application) {
     var post: Post = Post()
-    private val postRepository: PostRepository = PostRepository()
+    private val postRepository: PostRepository = PostRepository(application)
     private val topicRepository: TopicRepository = TopicRepository()
     var topics: LiveData<List<Topic>> = topicRepository.topicsObserver
 

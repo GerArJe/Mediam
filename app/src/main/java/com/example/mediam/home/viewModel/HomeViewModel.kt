@@ -1,4 +1,4 @@
-package com.example.mediam.ui.home
+package com.example.mediam.home.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

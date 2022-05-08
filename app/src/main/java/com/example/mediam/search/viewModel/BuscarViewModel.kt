@@ -1,4 +1,4 @@
-package com.example.mediam.ui.buscar
+package com.example.mediam.search.viewModel
 
 import androidx.lifecycle.ViewModel
 

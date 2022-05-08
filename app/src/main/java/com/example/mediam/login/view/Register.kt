@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.mediam.MainNavigationActivity
-import com.example.mediam.post.view.Home
+import com.example.mediam.home.view.MainNavigationActivity
 import com.example.mediam.R
 import com.example.mediam.login.viewModel.RegisterViewModel
 import com.example.mediam.databinding.ActivityRegisterBinding

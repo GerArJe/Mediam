@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.mediam.ui.home.HomeFragment"
+        android:name="com.example.mediam.home.view.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_posts"
-        android:name="com.example.mediam.ui.posts.PostsFragment"
+        android:name="com.example.mediam.post.view.PostsFragment"
         android:label="@string/title_posts"
         tools:layout="@layout/fragment_posts" />
 
     <fragment
         android:id="@+id/navigation_search_users"
-        android:name="com.example.mediam.ui.buscar.BuscarFragment"
+        android:name="com.example.mediam.search.view.BuscarFragment"
         android:label="@string/title_buscar"
         tools:layout="@layout/buscar_fragment" />
 
     <fragment
         android:id="@+id/navigation_perfil"
-        android:name="com.example.mediam.ui.perfil.PerfilFragment"
+        android:name="com.example.mediam.profile.view.PerfilFragment"
         android:label="@string/title_perfil"
         tools:layout="@layout/fragment_perfil" />
 </navigation>

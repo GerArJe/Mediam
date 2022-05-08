@@ -1,4 +1,4 @@
-package com.example.mediam.ui.buscar
+package com.example.mediam.search.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mediam.databinding.BuscarFragmentBinding
+import com.example.mediam.search.viewModel.BuscarViewModel
 
 class BuscarFragment : Fragment() {
 

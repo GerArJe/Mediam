@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.mediam.MainNavigationActivity
-import com.example.mediam.post.view.Home
+import com.example.mediam.home.view.MainNavigationActivity
 import com.example.mediam.R
 import com.example.mediam.databinding.ActivityMainBinding
 import com.example.mediam.login.viewModel.MainActivityViewModel
@@ -63,17 +62,11 @@ class MainActivity : AppCompatActivity() {
         editor.putString("doc", doc)
         editor.putString("url", url)
         editor.apply()
-
         goToHome()
     }
 
     private fun goToHome() {
-        //val preferences: SharedPreferences = getSharedPreferences("shad.pref", MODE_PRIVATE)
         val intentLogin = Intent(applicationContext, MainNavigationActivity::class.java)
-        /*intentLogin.apply {
-            putExtra("message", "Hola")
-            putExtra("data", preferences.getString("email", ""))
-        }*/
         startActivity(intentLogin)
         finish()
     }

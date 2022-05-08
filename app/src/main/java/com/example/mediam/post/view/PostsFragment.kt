@@ -1,4 +1,4 @@
-package com.example.mediam.ui.posts
+package com.example.mediam.post.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.mediam.databinding.FragmentPostsBinding
+import com.example.mediam.post.viewModel.PostsViewModel
 
 class PostsFragment : Fragment() {
 

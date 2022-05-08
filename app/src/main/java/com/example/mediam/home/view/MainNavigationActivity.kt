@@ -1,4 +1,4 @@
-package com.example.mediam
+package com.example.mediam.home.view
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.mediam.R
 import com.example.mediam.databinding.ActivityMainNavigationBinding
 import com.example.mediam.login.view.MainActivity
 
@@ -27,11 +28,12 @@ class MainNavigationActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main_navigation)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_posts, R.id.navigation_perfil
+                R.id.navigation_home,
+                R.id.navigation_posts,
+                R.id.navigation_search_users,
+                R.id.navigation_perfil
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
