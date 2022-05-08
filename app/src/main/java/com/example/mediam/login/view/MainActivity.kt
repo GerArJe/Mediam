@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
 
         if (preferences.getBoolean("login", false)){
-            println("Corri 1")
             goToHome()
         }
 
@@ -44,8 +43,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             viewModel.login().observe(this) {
                 it?.let {
-                    login()
-
+                    login(it.id, it.documento, it.nombre, it.photoUrl)
+                    println("---------------")
+                    println(it.id)
                 } ?: run {
                     Toast.makeText(this, "Datos inválidos", Toast.LENGTH_SHORT).show()
                 }
@@ -53,16 +53,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
-        val preferences: SharedPreferences =
-            getSharedPreferences("shad.pref", MODE_PRIVATE)
+    private fun login(id: String, doc:String, name:String, url:String) {
+        val preferences: SharedPreferences = getSharedPreferences("shad.pref", MODE_PRIVATE)
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putBoolean("login", true)
         editor.putString("email", viewModel.user.email)
+        editor.putString("name", name)
+        editor.putString("id", id)
+        editor.putString("doc", doc)
+        editor.putString("url", url)
         editor.apply()
 
         goToHome()
-        Toast.makeText(this, "Iniciando Sesión...", Toast.LENGTH_SHORT).show()
     }
 
     private fun goToHome() {

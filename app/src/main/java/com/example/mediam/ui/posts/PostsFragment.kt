@@ -1,4 +1,4 @@
-package com.example.mediam.ui.dashboard
+package com.example.mediam.ui.posts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +28,7 @@ class PostsFragment : Fragment() {
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.textPosts
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

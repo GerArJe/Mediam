@@ -7,7 +7,7 @@ import com.example.mediam.model.repository.UserRepository
 
 
 class RegisterViewModel: ViewModel() {
-    var user: User = User("", "", "", "","")
+    var user: User = User(id="", documento = "", nombre = "", email = "",password = "")
     private val userRepository: UserRepository = UserRepository()
 
     fun singUp(): LiveData<User?> {

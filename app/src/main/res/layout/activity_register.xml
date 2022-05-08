@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ingrese_su_n_mero_de_documento"
+            android:inputType="number"
             android:text="@={viewmodel.user.documento}"
             android:layout_marginTop="32dp"
             android:layout_marginHorizontal="64dp"

@@ -9,6 +9,8 @@ class User (
     var documento: String = "",
     var nombre: String = "",
     var email: String = "",
+    var followers:ArrayList<String> = ArrayList(),
+    var following:ArrayList<String> = ArrayList(),
     @JvmField @Exclude
     var password: String = "",
     @JvmField @PropertyName("url_photo")
