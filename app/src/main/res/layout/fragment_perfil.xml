@@ -87,6 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
+                        android:text="0"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/bungee"
                         android:layout_centerInParent="true" />
@@ -130,6 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
+                        android:text="0"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/bungee"
                         android:layout_centerInParent="true" />
