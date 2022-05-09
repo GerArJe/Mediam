@@ -1,5 +1,6 @@
 package com.example.mediam.model.repository
 
+import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,7 @@ import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PostRepository {
+class PostRepository(myContext: Context) {
     private val POSTS_COLLECTION: String = "posts"
     var postsObserver: MutableLiveData<List<Post>> = MutableLiveData()
     var postObserver: MutableLiveData<Post> = MutableLiveData()
@@ -92,7 +93,40 @@ class PostRepository {
             .addOnFailureListener {
                 stateDeleteObserver.value = false
             }
-//        TODO: cargar post
         return stateDeleteObserver
+    }
+
+    fun loadPostsFirestore(id: String? = null) {
+        if(id == null){//si viene nulo, o sea, sin id, quiere decir que este metodo listará todos los posts
+            //se usará para el Home. si se le envia id, entonces traerá solo los post del usuario en sesión.
+            firestore.collection(POSTS_COLLECTION).get().addOnSuccessListener {
+                val postList: ArrayList<Post> = arrayListOf<Post>()
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        val myPost: Post? = document.toObject(Post::class.java)
+                        myPost?.let {
+                            it.id = document.id
+                            postList.add(it)
+                        }
+                    }
+                }
+                postsObserver.value = postList
+            }
+        }else{
+            firestore.collection(POSTS_COLLECTION).whereEqualTo("idUser",id).get().addOnSuccessListener {
+                val postList: ArrayList<Post> = arrayListOf<Post>()
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        val myPost: Post? = document.toObject(Post::class.java)
+                        myPost?.let {
+                            it.id = document.id
+                            postList.add(it)
+                        }
+                    }
+                }
+                postsObserver.value = postList
+            }
+        }
+
     }
 }
