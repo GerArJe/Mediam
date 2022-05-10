@@ -11,11 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mediam.databinding.FragmentHomeBinding
 import com.example.mediam.home.viewModel.HomeViewModel
 import com.example.mediam.login.view.Register
+import com.example.mediam.model.entity.Post
+import com.example.mediam.post.adapter.PostsAdapter
 import com.example.mediam.post.view.PostActivity
+import com.example.mediam.profile.viewModel.PerfilViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    lateinit var viewModel: HomeViewModel
+    lateinit var adapter: PostsAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,23 +31,29 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
+        viewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        adapter = PostsAdapter(arrayListOf())
+        binding.adapter = adapter
 
+
+        loadPosts()
         createPost()
 
+        val root: View = binding.root
         return root
     }
 
-    fun createPost() {
+    private fun loadPosts() {
+        viewModel.posts.observe(viewLifecycleOwner) {
+            adapter.refresh(it as ArrayList<Post>)
+        }
+    }
+
+
+    private fun createPost() {
         _binding?.let {
             it.fabHome.setOnClickListener {
                 val intentPost = Intent(this.context, PostActivity::class.java)
@@ -54,5 +65,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        viewModel.loadAllPosts()
+        super.onResume()
     }
 }
