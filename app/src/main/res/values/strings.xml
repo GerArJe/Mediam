@@ -29,4 +29,5 @@
     <string name="title_buscar">Buscar</string>
     <string name="seguidores">Seguidores</string>
     <string name="siguiendo">Siguiendo</string>
+    <string name="description_fab_create_post">Crear post</string>
 </resources>

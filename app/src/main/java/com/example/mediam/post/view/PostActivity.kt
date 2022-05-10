@@ -60,6 +60,13 @@ class PostActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setSpinner()
         takePicture()
         onSubmit()
+        back()
+    }
+
+    private fun back() {
+        binding.btnBackPost.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getUser() {

@@ -1,5 +1,6 @@
 package com.example.mediam.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.mediam.databinding.FragmentHomeBinding
 import com.example.mediam.home.viewModel.HomeViewModel
+import com.example.mediam.login.view.Register
+import com.example.mediam.post.view.PostActivity
 
 class HomeFragment : Fragment() {
 
@@ -33,7 +36,19 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        createPost()
+
         return root
+    }
+
+    fun createPost() {
+        _binding?.let {
+            it.fabHome.setOnClickListener {
+                val intentPost = Intent(this.context, PostActivity::class.java)
+                startActivity(intentPost)
+            }
+        }
     }
 
     override fun onDestroyView() {
