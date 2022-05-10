@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         editor.putBoolean("login", true)
         editor.putString("email", viewModel.user.email)
         editor.putString("name", name)
-        editor.putString("id", id)
+        editor.putString("idUser", id)
         editor.putString("doc", doc)
         editor.putString("url", url)
         editor.apply()
