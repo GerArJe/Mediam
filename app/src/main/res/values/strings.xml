@@ -30,4 +30,7 @@
     <string name="seguidores">Seguidores</string>
     <string name="siguiendo">Siguiendo</string>
     <string name="description_fab_create_post">Crear post</string>
+    <string name="reset">Limpiar</string>
+    <string name="txt_hint_titulo_search">Titulo</string>
+    <string name="txt_hint_description_search">Descripción</string>
 </resources>

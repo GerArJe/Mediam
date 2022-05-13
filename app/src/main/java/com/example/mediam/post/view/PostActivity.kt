@@ -1,5 +1,6 @@
 package com.example.mediam.post.view
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -71,8 +72,8 @@ class PostActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun getUser() {
         val preferences =
-            getSharedPreferences("store_app.pref", MODE_PRIVATE)
-        idUser = preferences.getString("idUSer", "").toString()
+            getSharedPreferences("shad.pref", MODE_PRIVATE)
+        idUser = preferences.getString("idUser", "").toString()
     }
 
     private fun createImage(): File? {
@@ -156,6 +157,7 @@ class PostActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 viewModel.add(photoUri).observe(this) { id ->
                     if (id != "") {
                         binding.btnSubmitPost.isEnabled = true
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         binding.btnSubmitPost.isEnabled = true
@@ -183,6 +185,7 @@ class PostActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             if (viewModel.post.isComplete()) {
                 viewModel.update(photoUri).observe(this) { state ->
                     if (state) {
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         Toast.makeText(

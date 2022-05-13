@@ -6,11 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.mediam.databinding.FragmentHomeBinding
 import com.example.mediam.home.viewModel.HomeViewModel
 import com.example.mediam.login.view.Register
+import com.example.mediam.model.entity.Filter
 import com.example.mediam.model.entity.Post
 import com.example.mediam.post.adapter.PostsAdapter
 import com.example.mediam.post.view.PostActivity
@@ -21,6 +28,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     lateinit var viewModel: HomeViewModel
     lateinit var adapter: PostsAdapter
+    private lateinit var resultFilter: ActivityResultLauncher<Intent>
+    private lateinit var resultCreate: ActivityResultLauncher<Intent>
+    private lateinit var actionBar: ActionBar
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -41,9 +51,39 @@ class HomeFragment : Fragment() {
 
         loadPosts()
         createPost()
+        search()
 
         val root: View = binding.root
         return root
+    }
+
+
+
+    private fun search() {
+        _binding?.let {
+            it.fabSearchPostsHome.setOnClickListener {
+                val intentSearch = Intent(this.context, SearchActivity::class.java)
+                activity?.let { it1 ->
+                    intentSearch.resolveActivity(it1.packageManager)?.let {
+                        resultFilter.launch(intentSearch)
+                    } ?: run {
+                        println("HomeFragment: error intentSearch")
+                    }
+                } ?: run {
+                    println("HomeFragment: error activity")
+                }
+
+
+            }
+        }
+
+        resultFilter =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                if (activityResult.resultCode == AppCompatActivity.RESULT_OK) run {
+                    viewModel.filter =
+                        activityResult.data!!.getSerializableExtra("filter") as Filter
+                }
+            }
     }
 
     private fun loadPosts() {
@@ -55,11 +95,31 @@ class HomeFragment : Fragment() {
 
     private fun createPost() {
         _binding?.let {
-            it.fabHome.setOnClickListener {
+            it.fabCreatePostHome.setOnClickListener {
                 val intentPost = Intent(this.context, PostActivity::class.java)
-                startActivity(intentPost)
+                activity?.let { it1 ->
+                    intentPost.resolveActivity(it1.packageManager)?.let {
+                        resultCreate.launch(intentPost)
+                    } ?: run {
+                        println("HomeFragment: error intentSearch")
+                    }
+                } ?: run {
+                    println("HomeFragment: error activity")
+                }
             }
         }
+
+        resultCreate =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                if (activityResult.resultCode == AppCompatActivity.RESULT_OK) run {
+                    viewModel.filter = Filter()
+
+                }
+            }
+    }
+
+    private fun hasFilters(): Boolean {
+        return viewModel.filter.title.isNotEmpty() || viewModel.filter.idTopic.isNotEmpty()
     }
 
     override fun onDestroyView() {
@@ -68,7 +128,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onResume() {
-        viewModel.loadAllPosts()
+        if (!hasFilters()) {
+            viewModel.loadAllPosts()
+        } else {
+            viewModel.loadPostByFilters()
+        }
         super.onResume()
     }
+
+
 }
