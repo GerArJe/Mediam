@@ -11,11 +11,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_posts"
-        android:name="com.example.mediam.post.view.PostsFragment"
-        android:label="@string/title_posts"
-        tools:layout="@layout/fragment_posts" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_posts"-->
+<!--        android:name="com.example.mediam.post.view.PostsFragment"-->
+<!--        android:label="@string/title_posts"-->
+<!--        tools:layout="@layout/fragment_posts" />-->
 
     <fragment
         android:id="@+id/navigation_search_users"

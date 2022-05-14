@@ -4,7 +4,9 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mediam.model.entity.Filter
 import com.example.mediam.model.entity.Post
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,7 +19,6 @@ class PostRepository(myContext: Context) {
     var postsObserver: MutableLiveData<List<Post>> = MutableLiveData()
     var postObserver: MutableLiveData<Post> = MutableLiveData()
     private val firestore: FirebaseFirestore = Firebase.firestore
-
 
     fun getById(id: String) {
         firestore.collection(POSTS_COLLECTION).document(id).get().addOnSuccessListener {
@@ -97,36 +98,132 @@ class PostRepository(myContext: Context) {
     }
 
     fun loadPostsFirestore(id: String? = null) {
-        if(id == null){//si viene nulo, o sea, sin id, quiere decir que este metodo listará todos los posts
+        if (id == null) {//si viene nulo, o sea, sin id, quiere decir que este metodo listará todos los posts
             //se usará para el Home. si se le envia id, entonces traerá solo los post del usuario en sesión.
-            firestore.collection(POSTS_COLLECTION).get().addOnSuccessListener {
-                val postList: ArrayList<Post> = arrayListOf<Post>()
-                if (!it.isEmpty) {
-                    for (document in it.documents) {
-                        val myPost: Post? = document.toObject(Post::class.java)
-                        myPost?.let {
-                            it.id = document.id
-                            postList.add(it)
+            firestore.collection(POSTS_COLLECTION)
+                .get().addOnSuccessListener {
+                    val postList: ArrayList<Post> = arrayListOf<Post>()
+                    if (!it.isEmpty) {
+                        for (document in it.documents) {
+                            val myPost: Post? = document.toObject(Post::class.java)
+                            myPost?.let {
+                                it.id = document.id
+                                postList.add(it)
+                            }
                         }
                     }
+                    postsObserver.value = postList
                 }
-                postsObserver.value = postList
-            }
-        }else{
-            firestore.collection(POSTS_COLLECTION).whereEqualTo("idUser",id).get().addOnSuccessListener {
-                val postList: ArrayList<Post> = arrayListOf<Post>()
-                if (!it.isEmpty) {
-                    for (document in it.documents) {
-                        val myPost: Post? = document.toObject(Post::class.java)
-                        myPost?.let {
-                            it.id = document.id
-                            postList.add(it)
+        } else {
+            firestore.collection(POSTS_COLLECTION).whereEqualTo("idUser", id).get()
+                .addOnSuccessListener {
+                    val postList: ArrayList<Post> = arrayListOf<Post>()
+                    if (!it.isEmpty) {
+                        for (document in it.documents) {
+                            val myPost: Post? = document.toObject(Post::class.java)
+                            myPost?.let {
+                                it.id = document.id
+                                postList.add(it)
+                            }
                         }
                     }
+                    postsObserver.value = postList
                 }
-                postsObserver.value = postList
-            }
         }
 
     }
+
+
+    fun loadPostByFilters(filter: Filter) {
+        if (filter.title.isNotEmpty() && filter.idTopic.isNotEmpty()) {
+            getByAllFilterValues(filter)
+        } else if (filter.idTopic.isNotEmpty()) {
+            getByIdTopic(filter)
+        } else if (filter.title.isNotEmpty()) {
+            getByTitle(filter)
+        } else {
+            loadPostsFirestore()
+        }
+    }
+
+    private fun getByTitle(filter: Filter) {
+        val postRef = firestore.collection(POSTS_COLLECTION)
+
+        postRef
+            .whereGreaterThanOrEqualTo("title", filter.title)
+            .whereLessThan("title", filter.title + " z")
+
+            .get().addOnSuccessListener {
+
+                val postList: ArrayList<Post> = arrayListOf<Post>()
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        val myPost: Post? = document.toObject(Post::class.java)
+                        myPost?.let {
+                            it.id = document.id
+                            postList.add(it)
+                        }
+                    }
+                }
+                postsObserver.value = postList
+            }.addOnFailureListener {
+                postsObserver.value = arrayListOf<Post>()
+                println(it.message)
+            }
+    }
+
+
+    private fun getByIdTopic(filter: Filter) {
+        val postRef = firestore.collection(POSTS_COLLECTION)
+        postRef
+            .whereEqualTo("idTopic", filter.idTopic)
+
+            .get().addOnSuccessListener {
+
+                val postList: ArrayList<Post> = arrayListOf<Post>()
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        val myPost: Post? = document.toObject(Post::class.java)
+                        myPost?.let {
+                            it.id = document.id
+                            postList.add(it)
+                        }
+                    }
+                }
+                postsObserver.value = postList
+            }.addOnFailureListener {
+                postsObserver.value = arrayListOf<Post>()
+                println(it.message)
+            }
+    }
+
+
+    private fun getByAllFilterValues(filter: Filter) {
+        val postRef = firestore.collection(POSTS_COLLECTION)
+
+        postRef
+            .whereEqualTo("idTopic", filter.idTopic)
+            .whereGreaterThanOrEqualTo("title", filter.title)
+            .whereLessThan("title", filter.title + " z")
+
+            .get().addOnSuccessListener {
+
+                val postList: ArrayList<Post> = arrayListOf<Post>()
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        val myPost: Post? = document.toObject(Post::class.java)
+                        myPost?.let {
+                            it.id = document.id
+                            postList.add(it)
+                        }
+                    }
+                }
+                postsObserver.value = postList
+            }.addOnFailureListener {
+                postsObserver.value = arrayListOf<Post>()
+                println(it.message)
+            }
+    }
+
+
 }

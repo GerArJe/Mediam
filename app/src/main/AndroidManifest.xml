@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mediam">
-
+        <activity
+            android:name=".home.view.SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".post.view.PostActivity"
             android:exported="false" />
-
         <activity
             android:name=".home.view.MainNavigationActivity"
             android:exported="false"
