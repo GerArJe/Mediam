@@ -33,4 +33,5 @@
     <string name="reset">Limpiar</string>
     <string name="txt_hint_titulo_search">Titulo</string>
     <string name="txt_hint_description_search">Descripción</string>
+    <string name="imagen_post">Imagen post</string>
 </resources>

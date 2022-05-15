@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mediam">
         <activity
+            android:name=".PostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.view.SearchActivity"
             android:exported="false" />
         <activity
