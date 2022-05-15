@@ -6,15 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.mediam.databinding.FragmentPerfilBinding
 import com.example.mediam.model.entity.Post
 import com.example.mediam.post.adapter.PostsAdapter
 import com.example.mediam.profile.queries.QueriesProfile
 import com.example.mediam.profile.viewModel.PerfilViewModel
-import kotlinx.coroutines.*
 
 class PerfilFragment : Fragment() {
 
@@ -39,6 +38,12 @@ class PerfilFragment : Fragment() {
 
         loadInfo()
         loadPosts()
+
+        adapter.onItemLongClickListener={
+            idUser?.let { idu-> viewModel.deletePost(it, idu) }
+            Toast.makeText(requireActivity().getApplicationContext(), "Post ${it.title} eliminado...", Toast.LENGTH_SHORT).show()
+        }
+
         val root: View = binding.root
         return root
     }
@@ -46,7 +51,7 @@ class PerfilFragment : Fragment() {
 
     private fun loadInfo() {
         val preferences: SharedPreferences = requireActivity().getSharedPreferences("shad.pref", MODE_PRIVATE)
-        idUser = preferences.getString("id", "")
+        idUser = preferences.getString("idUser", "")
         binding.emailInfo.text = preferences.getString("email", "")
         binding.fullName.text = preferences.getString("name", "")
 
@@ -69,7 +74,7 @@ class PerfilFragment : Fragment() {
     }
 
     override fun onResume() {
-        idUser?.let { viewModel.loadProducts(it) }
+        idUser?.let { viewModel.loadPosts(it) }
         super.onResume()
     }
 

@@ -11,11 +11,11 @@ class PerfilViewModel (application: Application): AndroidViewModel(application){
     private val postRepository:PostRepository = PostRepository(application)
     var posts: LiveData<List<Post>> = postRepository.postsObserver
 
-    /*fun deleteProduct(myPost: Post){
-        postRepository.deleteFirestore(myPost)
-    }*/
+    fun deletePost(myPost: Post, idUSer:String){
+        postRepository.deleteFirestore(myPost, idUSer)
+    }
 
-    fun loadProducts(id:String) {
+    fun loadPosts(id:String) {
         postRepository.loadPostsFirestore(id)
     }
 

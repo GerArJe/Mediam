@@ -85,11 +85,12 @@ class PostRepository(myContext: Context) {
             }
     }
 
-    fun deleteFirestore(post: Post): LiveData<Boolean> {
+    fun deleteFirestore(post: Post, idUser:String): LiveData<Boolean> {
         val stateDeleteObserver: MutableLiveData<Boolean> = MutableLiveData()
         firestore.collection(POSTS_COLLECTION).document(post.id).delete()
             .addOnSuccessListener {
                 stateDeleteObserver.value = true
+                loadPostsFirestore(idUser)
             }
             .addOnFailureListener {
                 stateDeleteObserver.value = false
