@@ -11,6 +11,6 @@ class Topic : Serializable {
 
 
     override fun toString(): String {
-        return "$name"
+        return name
     }
 }

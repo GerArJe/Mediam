@@ -1,6 +1,7 @@
 package com.example.mediam.profile.view
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.mediam.PostDetailActivity
 import com.example.mediam.databinding.FragmentPerfilBinding
 import com.example.mediam.model.entity.Post
 import com.example.mediam.post.adapter.PostsAdapter
@@ -38,6 +40,17 @@ class PerfilFragment : Fragment() {
 
         loadInfo()
         loadPosts()
+
+        adapter.onItemClickListener={
+            val intentLogin = Intent(requireActivity().getApplicationContext(), PostDetailActivity::class.java)
+            intentLogin.apply {
+                putExtra("title", it.title)
+                putExtra("img", it.urlImage)
+                putExtra("desc", it.description)
+                putExtra("topic", it.topic)
+            }
+            startActivity(intentLogin)
+        }
 
         adapter.onItemLongClickListener={
             idUser?.let { idu-> viewModel.deletePost(it, idu) }

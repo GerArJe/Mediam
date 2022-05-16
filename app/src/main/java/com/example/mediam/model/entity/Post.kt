@@ -12,7 +12,9 @@ class Post : Serializable {
     var description: String = ""
     var idTopic: String = ""
     var idUser: String = ""
-
+    @JvmField
+    @Exclude
+    var topic: String = ""
     @JvmField
     @PropertyName("url_image")
     var urlImage: String =
@@ -25,6 +27,6 @@ class Post : Serializable {
     }
 
     override fun toString(): String {
-        return "Post(id='$id', title='$title', description='$description', idTopic='$idTopic', idUser='$idUser', urlImage='$urlImage')"
+        return "Post(id='$id', title='$title', description='$description', idTopic='$idTopic', topic='$topic',idUser='$idUser', urlImage='$urlImage')"
     }
 }

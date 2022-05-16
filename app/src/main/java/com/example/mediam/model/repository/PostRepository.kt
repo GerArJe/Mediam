@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mediam.model.entity.Filter
 import com.example.mediam.model.entity.Post
+import com.example.mediam.model.entity.Topic
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -16,9 +17,11 @@ import java.util.*
 
 class PostRepository(myContext: Context) {
     private val POSTS_COLLECTION: String = "posts"
+    private val TOPIC_COLLECTION: String = "topics"
     var postsObserver: MutableLiveData<List<Post>> = MutableLiveData()
     var postObserver: MutableLiveData<Post> = MutableLiveData()
     private val firestore: FirebaseFirestore = Firebase.firestore
+    lateinit var myPost:Post
 
     fun getById(id: String) {
         firestore.collection(POSTS_COLLECTION).document(id).get().addOnSuccessListener {
@@ -99,36 +102,49 @@ class PostRepository(myContext: Context) {
     }
 
     fun loadPostsFirestore(id: String? = null) {
+        val postList: ArrayList<Post> = arrayListOf()
         if (id == null) {//si viene nulo, o sea, sin id, quiere decir que este metodo listará todos los posts
             //se usará para el Home. si se le envia id, entonces traerá solo los post del usuario en sesión.
-            firestore.collection(POSTS_COLLECTION)
-                .get().addOnSuccessListener {
-                    val postList: ArrayList<Post> = arrayListOf<Post>()
+            firestore.collection(POSTS_COLLECTION).get()
+                .addOnSuccessListener {
                     if (!it.isEmpty) {
                         for (document in it.documents) {
-                            val myPost: Post? = document.toObject(Post::class.java)
-                            myPost?.let {
-                                it.id = document.id
-                                postList.add(it)
+                            myPost = document.toObject(Post::class.java)!!
+                            myPost.let { mp ->
+                                mp.id = document.id
+                                firestore.collection(TOPIC_COLLECTION).document(mp.idTopic).get()
+                                    .addOnSuccessListener {
+                                        it.let {
+                                            val myTopic:Topic = it.toObject(Topic::class.java)!!
+                                            mp.topic = myTopic.name
+                                            postList.add(mp)
+                                        }
+                                        postsObserver.value = postList
+                                    }
                             }
                         }
                     }
-                    postsObserver.value = postList
                 }
         } else {
             firestore.collection(POSTS_COLLECTION).whereEqualTo("idUser", id).get()
                 .addOnSuccessListener {
-                    val postList: ArrayList<Post> = arrayListOf<Post>()
                     if (!it.isEmpty) {
                         for (document in it.documents) {
-                            val myPost: Post? = document.toObject(Post::class.java)
-                            myPost?.let {
-                                it.id = document.id
-                                postList.add(it)
+                            myPost = document.toObject(Post::class.java)!!
+                            myPost.let { mp ->
+                                mp.id = document.id
+                                firestore.collection(TOPIC_COLLECTION).document(mp.idTopic).get()
+                                    .addOnSuccessListener {
+                                        it.let {
+                                            val myTopic:Topic = it.toObject(Topic::class.java)!!
+                                            mp.topic = myTopic.name
+                                            postList.add(mp)
+                                        }
+                                        postsObserver.value = postList
+                                    }
                             }
                         }
                     }
-                    postsObserver.value = postList
                 }
         }
 
