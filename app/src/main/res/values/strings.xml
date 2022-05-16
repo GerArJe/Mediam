@@ -34,4 +34,6 @@
     <string name="txt_hint_titulo_search">Titulo</string>
     <string name="txt_hint_description_search">Descripción</string>
     <string name="imagen_post">Imagen post</string>
+    <string name="categor_a">Categoría:</string>
+    <string name="contenido_de_la_publicaci_n">Contenido de la publicación:</string>
 </resources>

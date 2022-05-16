@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.example.mediam.PostDetailActivity
 import com.example.mediam.databinding.FragmentHomeBinding
 import com.example.mediam.home.viewModel.HomeViewModel
 import com.example.mediam.login.view.Register
@@ -52,6 +53,17 @@ class HomeFragment : Fragment() {
         loadPosts()
         createPost()
         search()
+
+        adapter.onItemClickListener={
+            val intentLogin = Intent(requireActivity().getApplicationContext(), PostDetailActivity::class.java)
+            intentLogin.apply {
+                putExtra("title", it.title)
+                putExtra("img", it.urlImage)
+                putExtra("desc", it.description)
+                putExtra("topic", it.topic)
+            }
+            startActivity(intentLogin)
+        }
 
         val root: View = binding.root
         return root

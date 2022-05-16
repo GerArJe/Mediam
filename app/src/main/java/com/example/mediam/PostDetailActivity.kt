@@ -14,6 +14,7 @@ class PostDetailActivity : AppCompatActivity() {
         val title :String? = intent.getStringExtra("title")
         val img: String? = intent.getStringExtra("img")
         val desc:String?=intent.getStringExtra("desc")
+        val topic:String?=intent.getStringExtra("topic")
 
 
 
@@ -25,6 +26,10 @@ class PostDetailActivity : AppCompatActivity() {
 
         desc.let {
             _binding.descPostDetail.text = it
+        }
+
+        topic.let {
+            _binding.topicPostDetail.text = it
         }
 
 

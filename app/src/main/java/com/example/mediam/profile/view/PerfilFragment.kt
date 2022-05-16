@@ -47,6 +47,7 @@ class PerfilFragment : Fragment() {
                 putExtra("title", it.title)
                 putExtra("img", it.urlImage)
                 putExtra("desc", it.description)
+                putExtra("topic", it.topic)
             }
             startActivity(intentLogin)
         }
