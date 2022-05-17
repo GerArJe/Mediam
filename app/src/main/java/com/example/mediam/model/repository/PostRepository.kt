@@ -21,14 +21,25 @@ class PostRepository(myContext: Context) {
     var postsObserver: MutableLiveData<List<Post>> = MutableLiveData()
     var postObserver: MutableLiveData<Post> = MutableLiveData()
     private val firestore: FirebaseFirestore = Firebase.firestore
-    lateinit var myPost:Post
+
 
     fun getById(id: String) {
+        lateinit var myPost:Post
         firestore.collection(POSTS_COLLECTION).document(id).get().addOnSuccessListener {
-            val post: Post? = it.toObject(Post::class.java)
-            post?.let { post ->
-                post.id = id
-                postObserver.value = post
+            it.let{
+                myPost = it.toObject(Post::class.java)!!
+                myPost.let { mp ->
+                    mp.id = it.id
+                    firestore.collection(TOPIC_COLLECTION).document(mp.idTopic).get()
+                        .addOnSuccessListener {
+                            it.let {
+                                val myTopic:Topic = it.toObject(Topic::class.java)!!
+                                mp.topic = myTopic.name
+                            }
+                            postObserver.value = mp
+                        }
+                }
+
             }
         }
     }
@@ -103,6 +114,7 @@ class PostRepository(myContext: Context) {
 
     fun loadPostsFirestore(id: String? = null) {
         val postList: ArrayList<Post> = arrayListOf()
+        lateinit var myPost:Post
         if (id == null) {//si viene nulo, o sea, sin id, quiere decir que este metodo listará todos los posts
             //se usará para el Home. si se le envia id, entonces traerá solo los post del usuario en sesión.
             firestore.collection(POSTS_COLLECTION).get()

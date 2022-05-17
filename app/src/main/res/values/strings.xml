@@ -36,4 +36,6 @@
     <string name="imagen_post">Imagen post</string>
     <string name="categor_a">Categoría:</string>
     <string name="contenido_de_la_publicaci_n">Contenido de la publicación:</string>
+    <string name="ir_atr_s">Ir Atrás</string>
+    <string name="editar_post">Editar post</string>
 </resources>
