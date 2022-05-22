@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
 
-        if (preferences.getBoolean("login", false)){
+        if (preferences.getBoolean("login", false) && preferences.getString("idUser", "") != ""){
             goToHome()
+        }else{
+            println("Me quedo en home")
         }
 
 

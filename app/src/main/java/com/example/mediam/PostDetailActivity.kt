@@ -16,11 +16,13 @@ class PostDetailActivity : AppCompatActivity() {
     lateinit var viewModel: PostDetailActivityViewModel
     private var idUser: String = ""
     var id: String? = null
+    var idUserPost: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         id = intent.getStringExtra("id")
+        idUserPost = intent.getStringExtra("idUserPost")
 
 
 
@@ -43,8 +45,10 @@ class PostDetailActivity : AppCompatActivity() {
                 _binding.post = it
 
                 if (idUser !== "") {
-                    _binding.btnEditPostDetail.isVisible = true
-                    edit()
+                    if(idUser == idUserPost){
+                        _binding.btnEditPostDetail.isVisible = true
+                        edit()
+                    }
                 }
             }
         }

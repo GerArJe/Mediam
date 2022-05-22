@@ -45,10 +45,7 @@ class PerfilFragment : Fragment() {
             val intentLogin = Intent(requireActivity().getApplicationContext(), PostDetailActivity::class.java)
             intentLogin.apply {
                 putExtra("id", it.id)
-                putExtra("title", it.title)
-                putExtra("img", it.urlImage)
-                putExtra("desc", it.description)
-                putExtra("topic", it.topic)
+                putExtra("idUserPost", it.idUser)
             }
             startActivity(intentLogin)
         }
